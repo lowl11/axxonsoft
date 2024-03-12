@@ -1,13 +1,21 @@
 package proxy_service
 
-import "github.com/lowl11/boost/pkg/web/requests"
+import (
+	"axxonsoft/repositories/task_repo"
+	"github.com/lowl11/boost"
+	"github.com/lowl11/boost/pkg/web/requests"
+)
 
 type Service struct {
-	client *requests.Service
+	dispatcher boost.Dispatcher
+	task       *task_repo.Repo
+	client     *requests.Service
 }
 
-func New() *Service {
+func New(dispatcher boost.Dispatcher, task *task_repo.Repo) *Service {
 	return &Service{
-		client: requests.New(),
+		dispatcher: dispatcher,
+		task:       task,
+		client:     requests.New(),
 	}
 }
